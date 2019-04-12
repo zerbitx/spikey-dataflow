@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"flag"
-	"log"
 	"reflect"
 	"strings"
 
 	"github.com/apache/beam/sdks/go/pkg/beam"
+	"github.com/apache/beam/sdks/go/pkg/beam/log"
 	"github.com/apache/beam/sdks/go/pkg/beam/io/textio"
 	"github.com/apache/beam/sdks/go/pkg/beam/x/beamx"
 )
@@ -38,7 +38,7 @@ func main() {
 
 	// Input validation is done as usual. Note that it must be after Init().
 	if *output == "" {
-		log.Fatal("No output provided")
+		log.Fatal(ctx, "No output provided")
 	}
 
 	// Concepts #3 and #4: The pipeline uses the named transform and DoFn.
@@ -52,7 +52,7 @@ func main() {
 	// Concept #1: The beamx.Run convenience wrapper allows a number of
 	// pre-defined runners to be used via the --runner flag.
 	if err := beamx.Run(ctx, p); err != nil {
-		log.Fatalf("Failed to execute job: %v", err)
+		log.Fatalf(ctx, "Failed to execute job: %v", err)
 	}
 }
 
